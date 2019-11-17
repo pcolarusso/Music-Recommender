@@ -1,0 +1,28 @@
+Classifier test was used to choose which classifier to use in Music Recommender
+Each classifier tested was run 100 times with the input data randomly split into train and test data. The average score and total time of execution was measured for each classifier.
+
+The most accurate classifier was AdaBoost (Adaptive Boosting) which had a score of 83.9% on the test data.
+
+Additionally one class SVM was added as that will also be used in the recommender for users who only have a positive data set (likes). The accuracy of the one class SVM was 71.4%
+
+Below is the result of the test:
+Nearest Neighbors  score =  0.7227107061503414
+--- 2.2206687927246094 seconds ---
+Linear SVM  score =  0.7482232346241452
+--- 9.033837080001831 seconds ---
+RBF SVM  score =  0.6864920273348525
+--- 30.529463291168213 seconds ---
+Decision Tree  score =  0.8041685649202737
+--- 1.4971387386322021 seconds ---
+Random Forest  score =  0.800546697038725
+--- 5.260982990264893 seconds ---
+Neural Net  score =  0.7702050113895211
+--- 131.90373826026917 seconds ---
+AdaBoost  score =  0.8396583143507974
+--- 18.81622290611267 seconds ---
+Naive Bayes  score =  0.7824373576309793
+--- 0.5107066631317139 seconds ---
+QDA  score =  0.7932118451025059
+--- 0.5493695735931396 seconds ---
+One Class SVM  score =  71.44419134396355
+--- 1.3472092151641846 seconds ---

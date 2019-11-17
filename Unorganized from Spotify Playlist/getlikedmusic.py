@@ -7,7 +7,6 @@ class Track(object):
     def __init__ (self, name, id):
         self.name = name
         self.id = id
-
         self.acousticness = None
         self.danceability = None
         self.energy = None
@@ -80,6 +79,9 @@ def generate_train_data(track_list):
     for track in track_list:
         train_data.append(track.get_all_features())
     return train_data
+
+def get_list_of_curated_playlist:
+
 
 
 if __name__ == "__main__":

@@ -54,7 +54,8 @@ def create_track_features(list_of_tracks, user):
             for track in list_of_tracks[i:i+50]:
                 track_id_list.append(track.id)
         else:
-            track_id_list.append(track.id)
+            for track in list_of_tracks[i:]:
+                track_id_list.append(track.id)
         features = user.audio_features(track_id_list)
         for track, track_features in zip(list_of_tracks[i:], features):
             track.set_all_features(track_features)
@@ -98,8 +99,6 @@ if __name__ == "__main__":
     track_list = get_track_names_ids(playlists[chosen_playlist][0], playlists[chosen_playlist][1])
 
     create_track_features(track_list, sp)
-
-    track_data = get_track_features(track_list)
-    print(track_data)
+    print(track_list)
 
 
