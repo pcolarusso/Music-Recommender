@@ -37,4 +37,4 @@ class Track(object):
                 return False
         return True
     def __str__(self):
-        return [self.name] + self.get_all_features()
+        return str(self.name)

@@ -1,23 +1,11 @@
 
 import spotipy
-import spotipy.util as util
-import authtoken
 from Track import Track
+from authtoken import get_credentials
 
 curated_playlists = { #contains spotify curated playlist IDS, key is playlist name and maps to playlist ID and length
     "US Top 50" : ['37i9dQZEVXbLRQDuF5jeBp', 50]
 }
-
-
-def get_credentials(username):
-    """Prompt user to enter credentials, redirects user to website to agree to data collection, returns user object"""
-    scope = 'user-library-read playlist-modify-private playlist-modify-public playlist-read-collaborative playlist-read-private'
-    token = util.prompt_for_user_token(username, scope, authtoken.CLIENT_ID, authtoken.ClIENT_SECRET, authtoken.REDIRECT_URL)
-    if token:
-        sp = spotipy.Spotify(auth=token)
-    else:
-        print("Can't get token for", username)
-    return sp
 
 
 def get_user_playlists(user):
@@ -34,11 +22,11 @@ def get_user_playlists(user):
     return all_playlists
 
 
-def get_track_names_ids(playlist_id, playlist_length):
+def get_track_names_ids(playlist_id, playlist_length, user, username):
     """Returns a list of tracks with track names and IDs"""
     list_of_tracks =[]
     for offset in range(0, playlist_length, 100):
-        playlist_info = sp.user_playlist_tracks(username, playlist_id, None, 100, offset)
+        playlist_info = user.user_playlist_tracks(username, playlist_id, None, 100, offset)
         for item in playlist_info['items']:
             track_id = item['track']['id']
             list_of_tracks.append(Track(item['track']['name'], track_id))
@@ -76,6 +64,18 @@ def list_of_curated_playlist():
 def get_curated_playlist_id(playlist_name):
     """Returns the ID and length of specified curated playlist"""
     return curated_playlists[playlist_name]
+
+def remove_unfeatured_tracks(track_list):
+    """Removes tracks that do not have features from the track list. Returns tracks that were removed.
+    Tracks may not have features if they were local songs or if they are not set by Spotify"""
+    removed_tracks = []
+    j = 0
+    for i in range(0, len(track_list)):
+        if not track_list[i-j].has_features_check():
+            removed_tracks.append(track_list.pop(i-j))
+            j += 1
+    return removed_tracks
+
 
 
 if __name__ == "__main__":
