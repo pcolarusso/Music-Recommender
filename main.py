@@ -1,9 +1,5 @@
-import spotipy
-import spotipy.util as util
-from authtoken import get_credentials
-from Track import Track
-from sklearn.ensemble import RandomForestClassifier, AdaBoostClassifier
-from sklearn.model_selection import train_test_split
+
+import authtoken
 import getmusicfromSpotify
 import classifier
 
@@ -12,7 +8,12 @@ print("If this is your first time logging in, you will be asked to agree to data
 
 username = input("Enter your username: ")
 
-user = get_credentials(username)
+try:
+    user = authtoken.get_credentials(username)
+except Exception as e:
+    print(e)
+    print("Error in Authentication, please try again")
+    exit(1)
 
 playlists = getmusicfromSpotify.get_user_playlists(user)
 print("Accessible Playlists:")
@@ -98,7 +99,6 @@ while True:
     test_track_list = getmusicfromSpotify.get_track_names_ids(test_playlist[0], test_playlist[1], user, username)
     print("Have all tracks, getting track features")
     getmusicfromSpotify.create_track_features(test_track_list, user)
-    getmusicfromSpotify.get_track_features(test_track_list)
     unfeatured_tests = getmusicfromSpotify.remove_unfeatured_tracks(test_track_list)
     if unfeatured_tests != []:
         print("Could not find all tracks. Missing tracks: ", end='')

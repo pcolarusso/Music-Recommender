@@ -1,10 +1,10 @@
 
 from sklearn import svm
 from sklearn.ensemble import AdaBoostClassifier
-from Track import Track
+
 
 def get_track_features(list_of_tracks):
-    """Returns a list of only track features grouped by track."""
+    """Returns a list of only track features grouped by track"""
     features = []
     for track in list_of_tracks:
         features.append(track.get_all_features())

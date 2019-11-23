@@ -14,5 +14,5 @@ def get_credentials(username):
     if token:
         sp = spotipy.Spotify(auth=token)
     else:
-        print("Can't get token for", username)
+        raise Exception("Can't get token for" + username)
     return sp

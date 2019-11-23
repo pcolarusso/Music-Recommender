@@ -48,14 +48,6 @@ def create_track_features(list_of_tracks, user):
         for track, track_features in zip(list_of_tracks[i:], features):
             track.set_all_features(track_features)
 
-
-def get_track_features(list_of_tracks):
-    """Returns a list of only track features grouped by track"""
-    features = []
-    for track in list_of_tracks:
-        features.append(track.get_all_features())
-    return features
-
 def list_of_curated_playlist():
     """Returns a list of the names of playlists provided in the curated_playlists dictionary
     These playlists are predetermined and can be added to by adding to curated_playlists"""
@@ -80,7 +72,7 @@ def remove_unfeatured_tracks(track_list):
 
 if __name__ == "__main__":
 
-    username = "pecolarusso"
+    username = "testaccount"
 
     sp = get_credentials(username)
 
@@ -96,9 +88,8 @@ if __name__ == "__main__":
         else:
             break
 
-    track_list = get_track_names_ids(playlists[chosen_playlist][0], playlists[chosen_playlist][1])
-
+    track_list = get_track_names_ids(playlists[chosen_playlist][0], playlists[chosen_playlist][1], sp, username)
+    temp = "["
     create_track_features(track_list, sp)
-    print(track_list)
 
 

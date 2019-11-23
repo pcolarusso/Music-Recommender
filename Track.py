@@ -38,3 +38,5 @@ class Track(object):
         return True
     def __str__(self):
         return str(self.name)
+    def __eq__(self, other):
+        return [self.name, self.id, self.get_all_features()] == [other.name, other.id, other.get_all_features()]
