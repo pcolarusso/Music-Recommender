@@ -16,20 +16,31 @@ class Test_getmusicfromSpotify(unittest.TestCase):
 
     def test_get_user_playlists(self):
         result = get_user_playlists(self.user)
-        test_playlists = {'Music Recommender Likes': ['55SIaUQhlvGaNp6v5P7wx5', 1216], 'Music Recommender Dislikes': ['1HY9z85KK99Kz5e8LbWsIu', 557], 'test playlist': ['60GmZXKkXDfIxiVLV7l2gH', 60]}
+        test_playlists = {'Music Recommender Dislikes': ['5JqOkaWf0ETx0WSKLg9FeX', 557], 'Music Recommender Likes': ['3qVgMcWC2VbRpMZWRm5PCp', 1216], 'test playlist': ['3aVt2PthZE4TooC9UR4dG5', 60]}
         self.assertEqual(result, test_playlists)
 
     def test_get_track_names_ids(self):
         result = get_track_names_ids('60GmZXKkXDfIxiVLV7l2gH', 60, self.user, self.username)
         self.assertEqual(len(result), 60)
         for result_track, test_track in zip(result, self.test_tracks):
-            self.assertTrue(result_track == test_track)
+            self.assertEqual(result_track, test_track)
 
     def test_create_track_features(self):
         create_track_features(self.test_tracks, self.user)
         self.assertEqual(len(self.test_tracks), 60)
         for result_track, test_track_features in zip(self.test_tracks, self.test_tracks_features):
-            self.assertEqual(result_track.get_all_features(), test_track_features)
+            self.assertTrue(0 <= result_track.acousticness <= 1)
+            self.assertTrue(0 <= result_track.danceability <= 1)
+            self.assertTrue(0 <= result_track.energy <= 1)
+            self.assertTrue(0 <= result_track.instrumentalness <= 1)
+            self.assertTrue(-1 <= result_track.key <= 12)
+            self.assertTrue(0 <= result_track.liveness <= 1)
+            self.assertTrue(result_track.loudness != None)
+            self.assertTrue(result_track.mode == 0 or result_track.mode == 1)
+            self.assertTrue(0 <= result_track.speechiness <= 1)
+            self.assertTrue(0 < result_track.tempo)
+            self.assertTrue(0 < result_track.time_signature)
+            self.assertTrue(0 <= result_track.valence <= 1)
 
     def test_remove_unfeatured_tracks(self):
         nonremoved = []

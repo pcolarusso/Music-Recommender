@@ -1,10 +1,10 @@
 
-import spotipy
 from Track import Track
 from authtoken import get_credentials
 
 curated_playlists = { #contains spotify curated playlist IDS, key is playlist name and maps to playlist ID and length
-    "US Top 50" : ['37i9dQZEVXbLRQDuF5jeBp', 50]
+    'US Top 50' : ['37i9dQZEVXbLRQDuF5jeBp', 50],
+    'Global Top 50' : ['37i9dQZEVXbMDoHDwVN2tF', 50]
 }
 
 
@@ -76,20 +76,21 @@ if __name__ == "__main__":
 
     sp = get_credentials(username)
 
+
     playlists = get_user_playlists(sp)
 
     for playlist in playlists:
-        print(playlist)
-
-    while(True):
-        chosen_playlist = input("Enter name of playlist containing songs for recommendations to be derived from: ")
-        if chosen_playlist not in playlists:
-            print("Playlist does not exist")
-        else:
-            break
-
-    track_list = get_track_names_ids(playlists[chosen_playlist][0], playlists[chosen_playlist][1], sp, username)
-    temp = "["
-    create_track_features(track_list, sp)
+        print(playlist, playlists[playlist][0], playlists[playlist][1])
+    #
+    # while(True):
+    #     chosen_playlist = input("Enter name of playlist containing songs for recommendations to be derived from: ")
+    #     if chosen_playlist not in playlists:
+    #         print("Playlist does not exist")
+    #     else:
+    #         break
+    #
+    # track_list = get_track_names_ids(playlists[chosen_playlist][0], playlists[chosen_playlist][1], sp, username)
+    # temp = "["
+    # create_track_features(track_list, sp)
 
 

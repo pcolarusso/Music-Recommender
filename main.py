@@ -46,7 +46,7 @@ dislikes_exist = input("Enter y for yes or anything else for no: ")
 
 if dislikes_exist == 'y':
     while True:
-        dislike_playlist = input("Enter name of playlist containing songs of likes for recommendations to be derived from: ")
+        dislike_playlist = input("Enter name of playlist containing songs of dislikes for recommendations to be derived from: ")
         if dislike_playlist not in playlists:
             print("Playlist does not exist")
         else:
