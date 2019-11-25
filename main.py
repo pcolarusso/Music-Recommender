@@ -50,7 +50,7 @@ if dislikes_exist == 'y':
         if dislike_playlist not in playlists:
             print("Playlist does not exist")
         else:
-            havedislikes = True
+            have_dislikes = True
             dislike_track_list = getmusicfromSpotify.get_track_names_ids(playlists[dislike_playlist][0], playlists[dislike_playlist][1], user, username)
             print("Have all tracks, getting track features")
             getmusicfromSpotify.create_track_features(dislike_track_list, user)
@@ -64,10 +64,10 @@ if dislikes_exist == 'y':
                 print("Received track features")
             break
 else:
-    havedislikes = False
+    have_dislikes = False
 
 print("Running Machine Learning Algorithm")
-if havedislikes:
+if have_dislikes:
     print("Training Adaboost Classifier")
     clf = classifier.adaboost_train(like_track_list, dislike_track_list)
 else:

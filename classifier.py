@@ -10,6 +10,7 @@ def get_track_features(list_of_tracks):
         features.append(track.get_all_features())
     return features
 
+
 def one_class_SVM(train_data, test_data):
     """Runs a one class svm on train_data and predicts test_data.
     train_data is only positive class data and is a list of audio features.
@@ -20,6 +21,7 @@ def one_class_SVM(train_data, test_data):
     predicted_data_binary = clf.predict(test_data)
     return predicted_data_binary
 
+
 def one_class_SVM_train(train_data):
     """Creates a one class SVM based on the train_data provided. Returns trained classifier.
     train_data is a list of Tracks with audio features."""
@@ -27,6 +29,7 @@ def one_class_SVM_train(train_data):
     clf = svm.OneClassSVM(nu=0.1, kernel="rbf", gamma=0.01)
     clf.fit(track_features)
     return clf
+
 
 def adaboost_train(train_positive, train_negative):
     """Creates a Adaboost classifier based on the train_data provided. Returns trained classifier. Returns trained classifier
@@ -37,6 +40,7 @@ def adaboost_train(train_positive, train_negative):
     clf = AdaBoostClassifier()
     clf.fit(track_features, train_target)
     return clf
+
 
 def classify_tracks(clf, test_data):
     """Uses trained classifier on test_data.

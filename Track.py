@@ -14,6 +14,7 @@ class Track(object):
         self.tempo = None
         self.time_signature = None
         self.valence = None
+
     def set_all_features(self, features):
         self.acousticness = features['acousticness']
         self.danceability = features['danceability']
@@ -27,16 +28,20 @@ class Track(object):
         self.tempo = features['tempo']
         self.time_signature = features['time_signature']
         self.valence = features['valence']
+
     def get_all_features(self):
         return [self.acousticness, self.danceability, self.energy, self.instrumentalness, self.key, self.liveness,
         self.loudness, self.mode, self.speechiness, self.tempo, self.time_signature, self.valence]
+
     def has_features_check(self):
         features = self.get_all_features()
         for feature in features:
             if feature == None:
                 return False
         return True
+
     def __str__(self):
         return str(self.name)
+
     def __eq__(self, other):
         return [self.name, self.id, self.get_all_features()] == [other.name, other.id, other.get_all_features()]

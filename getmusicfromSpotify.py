@@ -1,6 +1,6 @@
 
-from Track import Track
 from authtoken import get_credentials
+from Track import Track
 
 curated_playlists = { #contains spotify curated playlist IDS, key is playlist name and maps to playlist ID and length
     'US Top 50' : ['37i9dQZEVXbLRQDuF5jeBp', 50],
@@ -48,14 +48,17 @@ def create_track_features(list_of_tracks, user):
         for track, track_features in zip(list_of_tracks[i:], features):
             track.set_all_features(track_features)
 
+
 def list_of_curated_playlist():
     """Returns a list of the names of playlists provided in the curated_playlists dictionary
     These playlists are predetermined and can be added to by adding to curated_playlists"""
     return list(curated_playlists.keys())
 
+
 def get_curated_playlist_id(playlist_name):
     """Returns the ID and length of specified curated playlist"""
     return curated_playlists[playlist_name]
+
 
 def remove_unfeatured_tracks(track_list):
     """Removes tracks that do not have features from the track list. Returns tracks that were removed.
@@ -69,28 +72,29 @@ def remove_unfeatured_tracks(track_list):
     return removed_tracks
 
 
-
 if __name__ == "__main__":
 
     username = "testaccount"
 
     sp = get_credentials(username)
 
-
     playlists = get_user_playlists(sp)
 
     for playlist in playlists:
         print(playlist, playlists[playlist][0], playlists[playlist][1])
-    #
-    # while(True):
-    #     chosen_playlist = input("Enter name of playlist containing songs for recommendations to be derived from: ")
-    #     if chosen_playlist not in playlists:
-    #         print("Playlist does not exist")
-    #     else:
-    #         break
-    #
-    # track_list = get_track_names_ids(playlists[chosen_playlist][0], playlists[chosen_playlist][1], sp, username)
-    # temp = "["
-    # create_track_features(track_list, sp)
+
+    while True:
+        chosen_playlist = input("Enter name of playlist containing songs for recommendations to be derived from: ")
+        if chosen_playlist not in playlists:
+            print("Playlist does not exist")
+        else:
+            break
+
+    track_list = get_track_names_ids(playlists[chosen_playlist][0], playlists[chosen_playlist][1], sp, username)
+
+    create_track_features(track_list, sp)
+
+    for track in track_list:
+        print(track)
 
 
