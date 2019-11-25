@@ -1,0 +1,3 @@
+email = musicrecommender1@gmail.com
+password = thisisatest
+username = testaccount
