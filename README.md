@@ -38,3 +38,6 @@ For users that have both likes and dislikes, many classifiers were tested (test 
 
 ![Adaboost](https://i.imgur.com/Kw304aY.png "Adaboost")
 
+# How to Use
+First enter your Client ID and Client Secret ID from your Spotify Developer account in to authtoken.py and then run main.py and follow the prompts in the console. The first time you login to a Spotify account, your browser will open to ask for the users credentials.
+
