@@ -3,8 +3,8 @@ import spotipy
 import spotipy.util as util
 
 
-CLIENT_ID = "d0c3b442f93c414b9c5a73b9cc740fcd"
-ClIENT_SECRET = "f21eb9b28d834d3eae94094356ae71c5"
+CLIENT_ID = "Client ID goes here"
+ClIENT_SECRET = "Client Secret ID goes here"
 REDIRECT_URL = "http://localhost/"
 
 
